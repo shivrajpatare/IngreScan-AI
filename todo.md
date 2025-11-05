@@ -74,3 +74,10 @@
 - [ ] Add sharing features for consumer awareness
 - [x] Fix Page 2 navigation in sidebar showing 404 error
 - [x] Add inline chat/question section on scan result page for context-aware queries
+- [ ] Fix OAuth authentication causing Google 404 error when logging in with another account
+
+## Pre-Launch Critical Items
+- [x] Create Privacy Policy page
+- [x] Create Terms of Service page
+- [x] Create About page with Label Padhega India information
+- [x] Add profile completion prompt on scanner page

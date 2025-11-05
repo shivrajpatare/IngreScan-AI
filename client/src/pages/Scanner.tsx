@@ -10,9 +10,11 @@ import { useState } from "react";
 import { useLocation } from "wouter";
 import { toast } from "sonner";
 import { Upload, Type, Loader2 } from "lucide-react";
+import { ProfileCompletionBanner } from "@/components/ProfileCompletionBanner";
 
 export default function Scanner() {
   const [, setLocation] = useLocation();
+  const { data: profile } = trpc.profile.get.useQuery();
   const [inputType, setInputType] = useState<"text" | "image">("text");
   const [productName, setProductName] = useState("");
   const [ingredients, setIngredients] = useState("");
@@ -100,6 +102,8 @@ export default function Scanner() {
           <h1 className="text-3xl font-bold text-foreground">Ingredient Scanner</h1>
           <p className="text-muted-foreground mt-2">Upload a photo or enter ingredients manually</p>
         </div>
+
+        <ProfileCompletionBanner hasProfile={!!profile} />
 
         <Card>
           <CardHeader>

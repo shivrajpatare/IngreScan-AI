@@ -189,11 +189,24 @@ export default function Home() {
       )}
 
       {/* Footer */}
-      <footer className="border-t py-8 mt-auto bg-card">
-        <div className="container text-center text-sm text-muted-foreground">
-          <p>© 2025 {APP_TITLE}. Powered by WHO and FSSAI data sources.</p>
-          <p className="mt-2">Supporting the <span className="font-semibold text-primary">Label Padhega India</span> movement for consumer awareness.</p>
-          <p className="mt-1">Making food transparency accessible to everyone.</p>
+      <footer className="bg-green-900 text-white py-8 mt-16">
+        <div className="container">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-sm">
+              © 2025 Smart Food Risk Analyzer. Supporting Label Padhega India 🇮🇳
+            </p>
+            <div className="flex gap-6 text-sm">
+              <Link href="/about" className="hover:text-green-300 transition-colors">
+                About
+              </Link>
+              <Link href="/privacy" className="hover:text-green-300 transition-colors">
+                Privacy Policy
+              </Link>
+              <Link href="/terms" className="hover:text-green-300 transition-colors">
+                Terms of Service
+              </Link>
+            </div>
+          </div>
         </div>
       </footer>
     </div>
