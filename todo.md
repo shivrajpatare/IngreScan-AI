@@ -60,3 +60,7 @@
 - [x] Responsive design for mobile and desktop
 - [x] Loading states and error handling
 - [x] Theme and styling consistency
+
+
+## Bug Fixes
+- [x] Fix profile.get query returning undefined instead of null when profile doesn't exist
