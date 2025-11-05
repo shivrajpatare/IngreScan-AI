@@ -81,6 +81,23 @@ export default function ScanResult() {
   return (
     <DashboardLayout>
       <div className="space-y-6">
+        {/* Label Padhega India Educational Banner */}
+        <Card className="bg-primary/5 border-primary/20">
+          <CardContent className="pt-6">
+            <div className="flex items-start gap-4">
+              <Lightbulb className="h-6 w-6 text-primary flex-shrink-0 mt-1" />
+              <div>
+                <h3 className="font-semibold text-lg mb-2">Label Padhega India 🇮🇳</h3>
+                <p className="text-sm text-muted-foreground">
+                  This analysis helps you understand hidden ingredients like sugars (maltodextrin, corn syrup), 
+                  excessive salt, unhealthy oils, and harmful additives. Learn to read labels and make informed choices. 
+                  Remember: ingredients are listed by quantity - the first few are the most abundant!
+                </p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
         <div className="flex items-start justify-between">
           <div>
             <h1 className="text-3xl font-bold text-foreground">{scan.productName || "Scan Result"}</h1>

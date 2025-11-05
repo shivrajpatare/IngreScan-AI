@@ -73,11 +73,14 @@ export default function Home() {
       <section className="py-20 bg-gradient-to-b from-primary/5 to-background">
         <div className="container">
           <div className="max-w-3xl mx-auto text-center space-y-6">
+            <div className="inline-block px-4 py-2 bg-primary/10 rounded-full mb-4">
+              <p className="text-sm font-semibold text-primary">Supporting Label Padhega India Movement 🇮🇳</p>
+            </div>
             <h2 className="text-4xl md:text-5xl font-bold text-foreground">
               Know What You Eat
             </h2>
             <p className="text-xl text-muted-foreground">
-              Analyze food ingredients for health risks using AI-powered technology backed by WHO and FSSAI data. Make informed decisions about your food choices.
+              Analyze food ingredients for health risks using AI-powered technology backed by WHO and FSSAI data. Empowering consumers to read labels and make informed, healthy choices.
             </p>
             <div className="flex gap-4 justify-center pt-4">
               {isAuthenticated ? (
@@ -189,7 +192,8 @@ export default function Home() {
       <footer className="border-t py-8 mt-auto bg-card">
         <div className="container text-center text-sm text-muted-foreground">
           <p>© 2025 {APP_TITLE}. Powered by WHO and FSSAI data sources.</p>
-          <p className="mt-2">Making food transparency accessible to everyone.</p>
+          <p className="mt-2">Supporting the <span className="font-semibold text-primary">Label Padhega India</span> movement for consumer awareness.</p>
+          <p className="mt-1">Making food transparency accessible to everyone.</p>
         </div>
       </footer>
     </div>

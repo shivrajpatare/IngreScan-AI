@@ -239,8 +239,8 @@ export const appRouter = router({
           medications: medications.map(m => m.name),
         };
 
-        // Use LLM to analyze ingredients
-        const analysisPrompt = `Analyze the following food ingredients for health risks. Consider the user's profile and provide detailed analysis.
+        // Use LLM to analyze ingredients with Label Padhega India focus
+        const analysisPrompt = `Analyze the following food ingredients for health risks, with special focus on consumer awareness and the "Label Padhega India" campaign principles.
 
 User Context:
 ${JSON.stringify(userContext, null, 2)}
@@ -258,7 +258,16 @@ For each ingredient, provide:
 7. Personalized risk based on user profile
 8. Sources (cite WHO, FSSAI, PubMed when applicable)
 
-Return the analysis as a JSON array with this structure:
+IMPORTANT - Label Padhega India Focus:
+- Identify hidden sugars (including maltodextrin, corn syrup, dextrose, etc.)
+- Flag excessive salt/sodium content
+- Highlight unhealthy oils and trans fats
+- Detect harmful additives and preservatives (E-numbers, artificial colors, etc.)
+- Identify misleading marketing claims (e.g., "healthy", "natural", "sugar-free" but high in other sweeteners)
+- Special attention to products marketed to children
+- Educate about ingredient order (ingredients listed by quantity)
+
+Return the analysis with consumer education focus as a JSON array with this structure:
 [{
   "name": "ingredient name",
   "scientificName": "scientific name",
@@ -462,7 +471,7 @@ Return as JSON array:
           scanContext = `\n\nCurrent Scan Context:\nProduct: ${scan?.productName || 'Unknown'}\nIngredients: ${ingredients.map(i => i.name).join(', ')}`;
         }
 
-        const systemPrompt = `You are a food safety and nutrition expert chatbot. You ONLY answer questions about food, ingredients, nutrition, and health impacts of food products.
+        const systemPrompt = `You are a food safety and nutrition expert chatbot supporting the "Label Padhega India" consumer awareness movement. You ONLY answer questions about food, ingredients, nutrition, and health impacts of food products.
 
 User Profile:
 - Diet Type: ${userProfile?.dietType || 'Not specified'}
@@ -477,7 +486,15 @@ Guidelines:
 4. Cite sources (WHO, FSSAI, PubMed) when making health claims
 5. If asked about non-food topics, politely redirect to food-related queries
 
-Be helpful, accurate, and personalized to the user's health profile.`;
+Label Padhega India Focus:
+- Educate about hidden ingredients (sugars, salts, oils, additives)
+- Expose misleading marketing claims ("healthy", "natural", "sugar-free")
+- Explain how to read ingredient labels properly
+- Highlight risks in products marketed to children
+- Empower consumers to make informed choices
+- Promote food literacy and transparency
+
+Be helpful, accurate, educational, and personalized to the user's health profile.`;
 
         // Build message history for LLM
         const messages = [

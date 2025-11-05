@@ -64,3 +64,11 @@
 
 ## Bug Fixes
 - [x] Fix profile.get query returning undefined instead of null when profile doesn't exist
+- [x] Fix Scanner page showing 404 error
+
+## Label Padhega India Campaign Support
+- [x] Add educational content about hidden ingredients (sugar, salt, oil, additives)
+- [x] Highlight misleading marketing claims detection
+- [x] Add special focus on products targeted at children
+- [x] Include campaign branding and awareness messaging
+- [ ] Add sharing features for consumer awareness
