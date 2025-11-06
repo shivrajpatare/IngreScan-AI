@@ -16,34 +16,35 @@ export function BarcodeScanner({ onScanSuccess, onClose }: BarcodeScannerProps) 
   const [isScanning, setIsScanning] = useState(false);
   const [isInitializing, setIsInitializing] = useState(false);
   const scannerRef = useRef<Html5Qrcode | null>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
 
   const startScanning = async () => {
     setIsInitializing(true);
+    
     try {
-      // Ensure container exists
-      if (!containerRef.current) {
-        throw new Error("Scanner container not found");
+      // Small delay to ensure DOM is ready
+      await new Promise(resolve => setTimeout(resolve, 50));
+
+      // Check if element exists in DOM
+      const element = document.getElementById(SCANNER_ID);
+      if (!element) {
+        throw new Error("Scanner container element not found in DOM");
       }
 
-      // Create scanner instance
+      // Create and start scanner
       const scanner = new Html5Qrcode(SCANNER_ID);
       scannerRef.current = scanner;
 
-      // Start scanning
       await scanner.start(
-        { facingMode: "environment" }, // Use back camera
+        { facingMode: "environment" },
         {
           fps: 10,
           qrbox: { width: 250, height: 250 },
         },
         (decodedText) => {
-          // Successfully scanned
           onScanSuccess(decodedText);
           stopScanning();
         },
         (errorMessage) => {
-          // Scanning errors (ignore most of them as they're just "no barcode found")
           console.debug("Scan error:", errorMessage);
         }
       );
@@ -54,7 +55,6 @@ export function BarcodeScanner({ onScanSuccess, onClose }: BarcodeScannerProps) 
       console.error("Error starting scanner:", err);
       toast.error("Failed to start camera. Please check permissions.");
       setIsInitializing(false);
-      onClose();
     }
   };
 
@@ -121,8 +121,7 @@ export function BarcodeScanner({ onScanSuccess, onClose }: BarcodeScannerProps) 
         {isScanning && (
           <div className="space-y-4">
             <div 
-              ref={containerRef}
-              id={SCANNER_ID} 
+              id={SCANNER_ID}
               className="rounded-lg overflow-hidden border bg-black" 
               style={{ width: "100%", height: "300px" }} 
             />
