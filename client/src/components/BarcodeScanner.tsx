@@ -10,21 +10,27 @@ interface BarcodeScannerProps {
   onClose: () => void;
 }
 
+const SCANNER_ID = "barcode-scanner-container";
+
 export function BarcodeScanner({ onScanSuccess, onClose }: BarcodeScannerProps) {
   const [isScanning, setIsScanning] = useState(false);
   const [isInitializing, setIsInitializing] = useState(false);
   const scannerRef = useRef<Html5Qrcode | null>(null);
-  const scannerId = useRef("barcode-scanner-" + Math.random().toString(36).substring(7));
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const startScanning = async () => {
     setIsInitializing(true);
     try {
-      // Wait for DOM to be ready
-      await new Promise(resolve => setTimeout(resolve, 100));
+      // Ensure container exists
+      if (!containerRef.current) {
+        throw new Error("Scanner container not found");
+      }
 
-      const scanner = new Html5Qrcode(scannerId.current);
+      // Create scanner instance
+      const scanner = new Html5Qrcode(SCANNER_ID);
       scannerRef.current = scanner;
 
+      // Start scanning
       await scanner.start(
         { facingMode: "environment" }, // Use back camera
         {
@@ -53,7 +59,7 @@ export function BarcodeScanner({ onScanSuccess, onClose }: BarcodeScannerProps) 
   };
 
   const stopScanning = async () => {
-    if (scannerRef.current && isScanning) {
+    if (scannerRef.current) {
       try {
         await scannerRef.current.stop();
         await scannerRef.current.clear();
@@ -114,7 +120,12 @@ export function BarcodeScanner({ onScanSuccess, onClose }: BarcodeScannerProps) 
 
         {isScanning && (
           <div className="space-y-4">
-            <div id={scannerId.current} className="rounded-lg overflow-hidden border" style={{ width: "100%", height: "300px" }} />
+            <div 
+              ref={containerRef}
+              id={SCANNER_ID} 
+              className="rounded-lg overflow-hidden border bg-black" 
+              style={{ width: "100%", height: "300px" }} 
+            />
             <p className="text-sm text-center text-muted-foreground">
               Position the barcode within the frame
             </p>
