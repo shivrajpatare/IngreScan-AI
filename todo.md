@@ -89,3 +89,6 @@
 - [x] Auto-populate product name and ingredients from barcode data
 - [x] Add barcode tab to scanner page
 - [x] Handle barcode lookup errors gracefully
+
+## Bug Fixes
+- [x] Fix barcode scanner DOM element not found error on initialization

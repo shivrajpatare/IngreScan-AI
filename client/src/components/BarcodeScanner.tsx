@@ -14,12 +14,15 @@ export function BarcodeScanner({ onScanSuccess, onClose }: BarcodeScannerProps) 
   const [isScanning, setIsScanning] = useState(false);
   const [isInitializing, setIsInitializing] = useState(false);
   const scannerRef = useRef<Html5Qrcode | null>(null);
-  const scannerIdRef = useRef("barcode-scanner-" + Math.random().toString(36).substring(7));
+  const scannerId = useRef("barcode-scanner-" + Math.random().toString(36).substring(7));
 
   const startScanning = async () => {
     setIsInitializing(true);
     try {
-      const scanner = new Html5Qrcode(scannerIdRef.current);
+      // Wait for DOM to be ready
+      await new Promise(resolve => setTimeout(resolve, 100));
+
+      const scanner = new Html5Qrcode(scannerId.current);
       scannerRef.current = scanner;
 
       await scanner.start(
@@ -111,7 +114,7 @@ export function BarcodeScanner({ onScanSuccess, onClose }: BarcodeScannerProps) 
 
         {isScanning && (
           <div className="space-y-4">
-            <div id={scannerIdRef.current} className="rounded-lg overflow-hidden border" />
+            <div id={scannerId.current} className="rounded-lg overflow-hidden border" style={{ width: "100%", height: "300px" }} />
             <p className="text-sm text-center text-muted-foreground">
               Position the barcode within the frame
             </p>
