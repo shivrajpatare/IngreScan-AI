@@ -81,3 +81,11 @@
 - [x] Create Terms of Service page
 - [x] Create About page with Label Padhega India information
 - [x] Add profile completion prompt on scanner page
+
+## New Features - Barcode Scanner
+- [x] Add barcode scanning UI component
+- [x] Integrate device camera for barcode capture
+- [x] Connect to Open Food Facts API
+- [x] Auto-populate product name and ingredients from barcode data
+- [x] Add barcode tab to scanner page
+- [x] Handle barcode lookup errors gracefully
