@@ -9,9 +9,8 @@ import { trpc } from "@/lib/trpc";
 import { useState } from "react";
 import { useLocation } from "wouter";
 import { toast } from "sonner";
-import { Upload, Type, Loader2, Barcode } from "lucide-react";
+import { Upload, Type, Loader2 } from "lucide-react";
 import { ProfileCompletionBanner } from "@/components/ProfileCompletionBanner";
-import { BarcodeScanner } from "@/components/BarcodeScanner";
 
 export default function Scanner() {
   const [, setLocation] = useLocation();
@@ -22,31 +21,12 @@ export default function Scanner() {
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
-  const [showBarcodeScanner, setShowBarcodeScanner] = useState(false);
-  const [isLookingUpBarcode, setIsLookingUpBarcode] = useState(false);
 
-  const barcodeLookupMutation = trpc.barcode.lookup.useMutation();
 
   const uploadImageMutation = trpc.scanner.uploadImage.useMutation();
   const createScanMutation = trpc.scanner.createScan.useMutation();
   const processOCRMutation = trpc.scanner.processOCR.useMutation();
   const analyzeIngredientsMutation = trpc.analysis.analyzeIngredients.useMutation();
-
-  const handleBarcodeScan = async (barcode: string) => {
-    setShowBarcodeScanner(false);
-    setIsLookingUpBarcode(true);
-    try {
-      const result = await barcodeLookupMutation.mutateAsync({ barcode });
-      setProductName(result.productName);
-      setIngredients(result.ingredients);
-      setInputType("text");
-      toast.success(`Found: ${result.productName}`);
-    } catch (error: any) {
-      toast.error(error.message || "Product not found in database");
-    } finally {
-      setIsLookingUpBarcode(false);
-    }
-  };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -121,17 +101,8 @@ export default function Scanner() {
       <div className="max-w-4xl mx-auto space-y-6">
         <div>
           <h1 className="text-3xl font-bold text-foreground">Ingredient Scanner</h1>
-          <p className="text-muted-foreground mt-2">Scan barcodes, upload photos, or enter ingredients manually</p>
+          <p className="text-muted-foreground mt-2">Upload photos or enter ingredients manually</p>
         </div>
-
-        {showBarcodeScanner && (
-          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-            <BarcodeScanner
-              onScanSuccess={handleBarcodeScan}
-              onClose={() => setShowBarcodeScanner(false)}
-            />
-          </div>
-        )}
 
         <ProfileCompletionBanner hasProfile={!!profile} />
 
@@ -153,34 +124,6 @@ export default function Scanner() {
             </div>
           </CardContent>
         </Card>
-
-        <Button
-          onClick={() => setShowBarcodeScanner(true)}
-          disabled={isLookingUpBarcode || isProcessing}
-          className="w-full bg-green-600 hover:bg-green-700"
-          size="lg"
-        >
-          {isLookingUpBarcode ? (
-            <>
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              Looking up product...
-            </>
-          ) : (
-            <>
-              <Barcode className="mr-2 h-4 w-4" />
-              Scan Barcode
-            </>
-          )}
-        </Button>
-
-        <div className="relative">
-          <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t"></div>
-          </div>
-          <div className="relative flex justify-center text-xs uppercase">
-            <span className="bg-background px-2 text-muted-foreground">Or</span>
-          </div>
-        </div>
 
         <Tabs value={inputType} onValueChange={(v) => setInputType(v as "text" | "image")}>
           <TabsList className="grid w-full grid-cols-2">

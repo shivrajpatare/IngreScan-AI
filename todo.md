@@ -92,3 +92,10 @@
 
 ## Bug Fixes
 - [x] Fix barcode scanner DOM element not found error on initialization
+
+## Removal Tasks
+- [x] Remove barcode scanner feature from Scanner page
+- [x] Remove BarcodeScanner component
+- [x] Remove barcode router from backend
+- [x] Remove Open Food Facts API integration
+- [x] Remove html5-qrcode dependency

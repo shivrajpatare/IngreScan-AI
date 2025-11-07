@@ -7,7 +7,7 @@ import { z } from "zod";
 import * as db from "./db";
 import { storagePut } from "./storage";
 import { invokeLLM } from "./_core/llm";
-import { fetchProductByBarcode, extractIngredients } from "./openFoodFactsApi";
+
 
 // ============= Input Schemas =============
 
@@ -533,32 +533,7 @@ Be helpful, accurate, educational, and personalized to the user's health profile
       }),
   }),
 
-  // ============= Barcode Scanner Router =============
-  barcode: router({
-    lookup: publicProcedure
-      .input(z.object({ barcode: z.string().min(8).max(13) }))
-      .mutation(async ({ input }) => {
-        const productData = await fetchProductByBarcode(input.barcode);
-        
-        if (productData.status !== 1 || !productData.product) {
-          throw new TRPCError({
-            code: 'NOT_FOUND',
-            message: 'Product not found in Open Food Facts database',
-          });
-        }
 
-        const ingredients = extractIngredients(productData);
-        
-        return {
-          found: true,
-          productName: productData.product.product_name || '',
-          brand: productData.product.brands || '',
-          ingredients,
-          imageUrl: productData.product.image_front_url || productData.product.image_url,
-          nutritionGrade: productData.product.nutrition_grades,
-        };
-      }),
-  }),
 });
 
 export type AppRouter = typeof appRouter;
