@@ -99,3 +99,4 @@
 - [x] Remove barcode router from backend
 - [x] Remove Open Food Facts API integration
 - [x] Remove html5-qrcode dependency
+- [x] Fix Chat page showing 404 error - check routing configuration

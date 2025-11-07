@@ -24,7 +24,7 @@ function Router() {
       <Route path={"/profile"} component={Profile} />
       <Route path={"/scan/:id"} component={ScanResult} />
       <Route path={"/history"} component={History} />
-         <Route path={"/"} component={Home} />
+      <Route path={"/chat"} component={Chat} />
       <Route path={"/privacy"} component={PrivacyPolicy} />
       <Route path={"/terms"} component={TermsOfService} />
       <Route path={"/about"} component={About} />
