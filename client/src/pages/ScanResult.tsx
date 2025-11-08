@@ -234,7 +234,7 @@ export default function ScanResult() {
         </Card>
 
         {/* Inline Chat Section */}
-        <Card>
+        <Card className="mb-6">
           <CardHeader>
             <div className="flex items-center justify-between">
               <div>
@@ -277,7 +277,7 @@ export default function ScanResult() {
           )}
         </Card>
 
-        <div className="flex gap-4">
+        <div className="flex gap-4 mt-6">
           <Link href="/scanner"><Button>Scan Another Product</Button></Link>
           <Link href="/history"><Button variant="outline">View History</Button></Link>
         </div>
