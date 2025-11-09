@@ -68,7 +68,7 @@ export default function ScanResult() {
   if (isLoading) {
     return (
       <DashboardLayout>
-        <div className="space-y-6">
+        <div className="space-y-6 pb-24">
           <Skeleton className="h-32 w-full" />
           <Skeleton className="h-64 w-full" />
         </div>
@@ -91,7 +91,7 @@ export default function ScanResult() {
 
   return (
     <DashboardLayout>
-      <div className="space-y-6">
+      <div className="space-y-6 pb-24">
         {/* Label Padhega India Educational Banner */}
         <Card className="bg-primary/5 border-primary/20">
           <CardContent className="pt-6">

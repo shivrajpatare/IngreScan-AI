@@ -100,4 +100,4 @@
 - [x] Remove Open Food Facts API integration
 - [x] Remove html5-qrcode dependency
 - [x] Fix Chat page showing 404 error - check routing configuration
-- [x] Fix chatbot layout overlapping with buttons on scan result page
+- [x] Fix chatbot input box overlapping with action buttons at bottom of page
