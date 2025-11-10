@@ -184,7 +184,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## 🌐 Links
 
-- **Live Demo**: [Coming Soon]
+- **Live Demo**: https://foodriskanaly-yjkguatc.manus.space/ 
 - **Documentation**: [Coming Soon]
 - **Label Padhega India**: Learn more about the movement
 
