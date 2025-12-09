@@ -12,8 +12,6 @@ IngreScan-AI empowers Indian consumers to make informed, healthy food choices by
 
 **Supporting the Label Padhega India Movement** 🇮🇳 - Promoting food literacy and consumer awareness across India.
 
-"
-\[![Linkpreview](https://img.shields.io/badge/React-19-blue.svg)\
 
 ## ✨ Features
 
